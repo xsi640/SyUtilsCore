@@ -1,0 +1,7 @@
+D:\dotnetcore\SyUtilsCore\bin\Debug\netstandard1.6\SyUtilsCore.deps.json
+D:\dotnetcore\SyUtilsCore\bin\Debug\netstandard1.6\SyUtilsCore.dll
+D:\dotnetcore\SyUtilsCore\bin\Debug\netstandard1.6\SyUtilsCore.pdb
+D:\dotnetcore\SyUtilsCore\obj\Debug\netstandard1.6\SyUtilsCore.csprojResolveAssemblyReference.cache
+D:\dotnetcore\SyUtilsCore\obj\Debug\netstandard1.6\SyUtilsCore.AssemblyInfo.cs
+D:\dotnetcore\SyUtilsCore\obj\Debug\netstandard1.6\SyUtilsCore.dll
+D:\dotnetcore\SyUtilsCore\obj\Debug\netstandard1.6\SyUtilsCore.pdb
