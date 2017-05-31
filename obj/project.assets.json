@@ -1013,6 +1013,18 @@
           "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
+      "System.Threading.Thread/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Threading.Thread.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Threading.Thread.dll": {}
+        }
+      },
       "System.Threading.Timer/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4237,6 +4249,44 @@
         "system.threading.tasks.extensions.nuspec"
       ]
     },
+    "System.Threading.Thread/4.3.0": {
+      "sha512": "SfnooulE4sOwfCN75zfkftiGDJFatTQBhunlI/euIpDM9EYd+uWPFNkF1p/XTDNfaAgfEivnFW8e02QwoLYKlQ==",
+      "type": "package",
+      "path": "system.threading.thread/4.3.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Threading.Thread.dll",
+        "lib/netcore50/_._",
+        "lib/netstandard1.3/System.Threading.Thread.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Threading.Thread.dll",
+        "ref/netstandard1.3/System.Threading.Thread.dll",
+        "ref/netstandard1.3/System.Threading.Thread.xml",
+        "ref/netstandard1.3/de/System.Threading.Thread.xml",
+        "ref/netstandard1.3/es/System.Threading.Thread.xml",
+        "ref/netstandard1.3/fr/System.Threading.Thread.xml",
+        "ref/netstandard1.3/it/System.Threading.Thread.xml",
+        "ref/netstandard1.3/ja/System.Threading.Thread.xml",
+        "ref/netstandard1.3/ko/System.Threading.Thread.xml",
+        "ref/netstandard1.3/ru/System.Threading.Thread.xml",
+        "ref/netstandard1.3/zh-hans/System.Threading.Thread.xml",
+        "ref/netstandard1.3/zh-hant/System.Threading.Thread.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.threading.thread.4.3.0.nupkg.sha512",
+        "system.threading.thread.nuspec"
+      ]
+    },
     "System.Threading.Timer/4.3.0": {
       "sha512": "7KbttCNqSSjtfBGsdCXddwsxz32lSx3pG9z7YfqsfDILCGzBckPGWE4jm0An0pOO+bVm3KNQA8bl3pJBEMQmGA==",
       "type": "package",
@@ -4469,7 +4519,9 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v1.4": [
       "NETStandard.Library >= 1.6.1",
-      "Newtonsoft.Json >= 10.0.2"
+      "Newtonsoft.Json >= 10.0.2",
+      "System.Reflection >= 4.3.0",
+      "System.Threading.Thread >= 4.3.0"
     ]
   },
   "packageFolders": {
@@ -4478,17 +4530,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\dotnetcore\\SyUtilsCore\\SyUtilsCore.csproj",
+      "projectUniqueName": "D:\\dotnetcore\\SyUtilsCore\\SyUtilsCore.csproj",
       "projectName": "SyUtilsCore",
-      "projectPath": "d:\\dotnetcore\\SyUtilsCore\\SyUtilsCore.csproj",
-      "outputPath": "d:\\dotnetcore\\SyUtilsCore\\obj\\",
+      "projectPath": "D:\\dotnetcore\\SyUtilsCore\\SyUtilsCore.csproj",
+      "outputPath": "D:\\dotnetcore\\SyUtilsCore\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netstandard1.4"
       ],
-      "files": {
-        "lib/netstandard1.4/SyUtilsCore.dll": "d:\\dotnetcore\\SyUtilsCore\\bin\\placeholder\\netstandard1.4\\SyUtilsCore.dll"
-      },
       "frameworks": {
         "netstandard1.4": {
           "projectReferences": {}
@@ -4498,9 +4547,18 @@
     "frameworks": {
       "netstandard1.4": {
         "dependencies": {
+          "System.Threading.Thread": {
+            "target": "Package",
+            "version": "4.3.0"
+          },
           "NETStandard.Library": {
             "target": "Package",
-            "version": "1.6.1"
+            "version": "1.6.1",
+            "autoReferenced": true
+          },
+          "System.Reflection": {
+            "target": "Package",
+            "version": "4.3.0"
           },
           "Newtonsoft.Json": {
             "target": "Package",
