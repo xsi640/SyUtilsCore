@@ -6,8 +6,8 @@ namespace SyUtilsCore
 {
     public static class DesEncryptHelper
     {
-        static readonly byte[] KEY;
-        static readonly byte[] IV;
+        private static byte[] _KEY;
+        private static byte[] _IV;
 
         static DesEncryptHelper()
         {
@@ -15,10 +15,23 @@ namespace SyUtilsCore
             IV = Convert.FromBase64String("YJgyPDx2F2I=");
         }
 
-        public static string Decrypt(string text)
+        public static byte[] KEY
         {
-            string result = string.Empty;
-            byte[] inputByteArray = Convert.FromBase64String(text);
+            get => _KEY;
+            set => _KEY = value;
+        }
+        public static byte[] IV
+        {
+            get => _IV;
+            set => _IV = value;
+        }
+
+        public static byte[] Decrypt(byte[] data)
+        {
+            byte[] result = null;
+            if (data == null || data.Length == 0)
+                return result;
+
             using (TripleDES des = TripleDES.Create())
             {
                 des.Key = KEY;
@@ -29,10 +42,45 @@ namespace SyUtilsCore
                 {
                     using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write))
                     {
-                        cs.Write(inputByteArray, 0, inputByteArray.Length);
+                        cs.Write(data, 0, data.Length);
                         cs.FlushFinalBlock();
                     }
-                    result = Encoding.UTF8.GetString(ms.ToArray());
+                    result = ms.ToArray();
+                }
+            }
+            return result;
+        }
+
+        public static string Decrypt(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+
+            byte[] inputByteArray = Convert.FromBase64String(text);
+            byte[] decryptArray = Decrypt(inputByteArray);
+            return Encoding.UTF8.GetString(decryptArray);
+        }
+
+        public static byte[] Encrypt(byte[] data)
+        {
+            byte[] result = null;
+            if (data == null || data.Length == 0)
+                return result;
+
+            using (TripleDES des = TripleDES.Create())
+            {
+                des.Mode = CipherMode.CBC;
+                des.Padding = PaddingMode.PKCS7;
+                des.Key = KEY;
+                des.IV = IV;
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(data, 0, data.Length);
+                        cs.FlushFinalBlock();
+                    }
+                    result = ms.ToArray();
                 }
             }
             return result;
@@ -40,35 +88,11 @@ namespace SyUtilsCore
 
         public static string Encrypt(string text)
         {
-            string result = string.Empty;
-            using (TripleDES des = TripleDES.Create())
-            {
-                des.Mode = CipherMode.CBC;
-                des.Padding = PaddingMode.PKCS7;
-                byte[] inputByteArray = Encoding.UTF8.GetBytes(text);
-                des.Key = KEY;
-                des.IV = IV;
-                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(inputByteArray, 0, inputByteArray.Length);
-                        cs.FlushFinalBlock();
-                    }
-                    result = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-            return result;
-        }
-
-        public static string HexToString(byte[] bytes)
-        {
-            return Convert.ToBase64String(bytes);
-        }
-
-        public static byte[] StringToHex(string src)
-        {
-            return Convert.FromBase64String(src);
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+            byte[] inputByteArray = Encoding.UTF8.GetBytes(text);
+            byte[] encryptArray = Encrypt(inputByteArray);
+            return Convert.ToBase64String(encryptArray);
         }
     }
 }
